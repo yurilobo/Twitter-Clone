@@ -15,7 +15,7 @@ class Tweet extends Model{
 	}
 	public function __set($atributo,$valor){
 		$this->$atributo=$valor;
-	}
+	} 
 
 	//metodo salvar
 	public function salvar(){
@@ -29,7 +29,7 @@ class Tweet extends Model{
 	}
 	//metodo recuperar
 	public function getAll() {
-	
+
 		$query = "
 			select 
 				t.id, 

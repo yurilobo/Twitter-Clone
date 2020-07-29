@@ -89,9 +89,10 @@
 											<?php if($usuario['seguindo_sn'] == 0) { ?>
 												<a href="/acao?acao=seguir&id_usuario=<?=$usuario['id']?>" class="btn btn-success">Seguir</a>
 											<?php } ?>
+
 											<?php if($usuario['seguindo_sn'] == 1) { ?>
- 											<a href="/acao?acao=deixar_de_seguir&id_usuario=<?=$usuario['id']?>" class="btn btn-danger">Deixar de seguir</a>
- 											<?php } ?>
+												<a href="/acao?acao=deixar_de_seguir&id_usuario=<?=$usuario['id']?>" class="btn btn-danger">Deixar de seguir</a>
+											<?php } ?>
 										</div>
 									</div>
 								</div>
@@ -100,6 +101,5 @@
 					</div>
 				</div>
 			<?php } ?>
-		</div>
 	</div>
 </div>

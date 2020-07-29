@@ -7,23 +7,31 @@ use MF\Controller\Action;
 use MF\Model\Container;
 
 class AppController extends Action {
-	public function timeline(){
+	public function timeline() {
 
-		session_start();
-
-			$this->validaAutenticacao();
+		$this->validaAutenticacao();
 			
-			//RECUPERAR E ENCAMINHA OS TWEETS	
-			$tweet = Container::getModel('Tweet');
+		//recuperação dos tweets
+		$tweet = Container::getModel('Tweet');
 
-			$tweet->__set('id_usuario', $_SESSION['id']);
+		$tweet->__set('id_usuario', $_SESSION['id']);
 
-			$tweets = $tweet->getAll();
+		$tweets = $tweet->getAll();
 
-			$this->view->tweets=$tweets;
+		$this->view->tweets = $tweets;
 
-			$this->render('timeline');
-	
+
+		$usuario = Container::getModel('Usuario');
+		$usuario->__set('id', $_SESSION['id']);
+
+		$this->view->info_usuario = $usuario->getInfoUsuario();
+		$this->view->total_tweets = $usuario->getTotalTweets();
+		$this->view->total_seguindo = $usuario->getTotalSeguindo();
+		$this->view->total_seguidores = $usuario->getTotalSeguidores();
+
+		$this->render('timeline');
+		
+		
 	}
 
 	public function tweet() {
@@ -37,6 +45,7 @@ class AppController extends Action {
 
 		$tweet->salvar();
 
+	
 		header('Location: /timeline');
 		
 	}
@@ -51,7 +60,7 @@ class AppController extends Action {
 	}
 
 	public function quemSeguir(){
-
+	
 		$this->validaAutenticacao();
 
 		$pesquisarPor = isset($_GET['pesquisarPor']) ? $_GET['pesquisarPor'] : '';
